@@ -56,5 +56,13 @@ const router = createRouter({
   },
 });
 
+router.beforeEach((to, from, next) => {
+  console.log("Global beforeEach");
+  console.log(to, from);
+  next();
+  //   next(false);
+  //   next("/teams");
+});
+
 app.use(router);
 app.mount("#app");

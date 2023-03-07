@@ -39,6 +39,11 @@ const router = createRouter({
         footer: UsersFooter,
       },
       name: "users",
+      beforeEnter(to, from, next) {
+        console.log("User beforeEnter");
+        console.log(to, from);
+        next();
+      },
     },
 
     {

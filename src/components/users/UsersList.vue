@@ -1,5 +1,6 @@
 <template>
   <button @click="onConfirm">Confirm</button>
+  <button @click="onChange">Save Changes ({{ chagesSaved }})</button>
   <ul>
     <user-item
       v-for="user in users"
@@ -17,17 +18,36 @@ export default {
   components: {
     UserItem,
   },
+  data() {
+    return {
+      chagesSaved: false,
+    };
+  },
   inject: ["users"],
   methods: {
     onConfirm() {
       //do something
       this.$router.push("/teams");
     },
+    onChange() {
+      this.chagesSaved = !this.chagesSaved;
+    },
   },
   beforeRouteEnter(to, from, next) {
     console.log("Userlist cmp beforeRouterEnter");
     console.log(to, from);
     next();
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log("User's list beforeRouteLeave");
+    console.log(to, from);
+
+    if (this.chagesSaved) {
+      next();
+    } else {
+      const ans = confirm(" are you sure?");
+      next(ans);
+    }
   },
 };
 </script>

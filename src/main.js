@@ -69,5 +69,11 @@ router.beforeEach((to, from, next) => {
   //   next("/teams");
 });
 
+router.afterEach((to, from) => {
+  // sending analytics data
+  console.log("Global afterEach");
+  console.log(to, from);
+});
+
 app.use(router);
 app.mount("#app");

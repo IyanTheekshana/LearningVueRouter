@@ -15,6 +15,7 @@ const router = createRouter({
       path: "/",
       redirect: "/teams",
       name: "home",
+      meta: { needsAuth: true },
     },
     {
       path: "/teams",
@@ -64,7 +65,12 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   console.log("Global beforeEach");
   console.log(to, from);
+
+  if (to.meta.needsAuth) {
+    console.log("Needs auth");
+  }
   next();
+
   //   next(false);
   //   next("/teams");
 });

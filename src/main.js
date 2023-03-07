@@ -4,6 +4,8 @@ import App from "./App.vue";
 import TeamsList from "./components/teams/TeamsList.vue";
 import UsersList from "./components/users/UsersList.vue";
 import TeamMembers from "./components/teams/TeamMembers.vue";
+import TeamsFooter from "./components/teams/TeamsFooter.vue";
+import UsersFooter from "./components/users/UsersFooter.vue";
 
 const app = createApp(App);
 const router = createRouter({
@@ -16,7 +18,10 @@ const router = createRouter({
     },
     {
       path: "/teams",
-      component: TeamsList,
+      components: {
+        default: TeamsList,
+        footer: TeamsFooter,
+      },
       name: "teams",
       children: [
         {
@@ -29,7 +34,10 @@ const router = createRouter({
     },
     {
       path: "/users",
-      component: UsersList,
+      components: {
+        default: UsersList,
+        footer: UsersFooter,
+      },
       name: "users",
     },
 
